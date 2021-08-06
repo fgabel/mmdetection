@@ -17,7 +17,7 @@ model = dict(
         csp_num_blocks=1,
         init_cfg=init_cfg),
     bbox_head=dict(
-        type='YOLOXHead', num_classes=80, in_channels=128, feat_channels=128, init_cfg=init_cfg),
+        type='YOLOXHead', num_classes=9, in_channels=128, feat_channels=128, init_cfg=init_cfg),
     # test
     test_cfg=dict(
         nms_pre=1000,
@@ -79,9 +79,7 @@ test_pipeline = [
         img_scale=img_scale,
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
-            dict(type='Pad', size=img_scale, pad_val=114.0),
+            dict(type='Pad', size_divisor=32),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img'])
