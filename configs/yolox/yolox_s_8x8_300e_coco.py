@@ -1,3 +1,6 @@
+wandb_project = 'mmdetection'
+wandb_experiment_name = 'yolox_s_default'
+
 _base_ = ['../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py']
 
 img_scale = (640, 640)
@@ -157,4 +160,11 @@ evaluation = dict(
     interval=interval,
     dynamic_intervals=[(max_epochs - num_last_epochs, 1)],
     metric='bbox')
-log_config = dict(interval=50)
+log_config = dict(interval=50,
+                  hooks=[
+                      dict(type='WandbLoggerHook',
+                           init_kwargs=dict(
+                               project=wandb_project,
+                               name=wandb_experiment_name))
+                           ]
+                      ])
