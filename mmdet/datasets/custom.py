@@ -54,6 +54,8 @@ class CustomDataset(Dataset):
 
     CLASSES = None
 
+    PALETTE = None
+
     def __init__(self,
                  ann_file,
                  pipeline,
@@ -239,7 +241,7 @@ class CustomDataset(Dataset):
         return self.pipeline(results)
 
     def prepare_test_img(self, idx):
-        """Get testing data  after pipeline.
+        """Get testing data after pipeline.
 
         Args:
             idx (int): Index of data.
