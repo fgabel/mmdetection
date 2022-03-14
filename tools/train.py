@@ -18,6 +18,7 @@ from mmdet.datasets import build_dataset
 from mmdet.models import build_detector
 from mmdet.utils import collect_env, get_root_logger, setup_multi_processes
 
+import wandb
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
@@ -195,6 +196,12 @@ def main():
             CLASSES=datasets[0].CLASSES)
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
+    print(model.CLASSES)
+    # add wandb logging
+    wandb.login(key="854c85e118ac311e04a52cdef94ec83e677f1ff7")
+    wandb.init(project =cfg.wandb_project, name = cfg.wandb_experiment_name, resume=True)
+    wandb.save(args.config)
+
     train_detector(
         model,
         datasets,

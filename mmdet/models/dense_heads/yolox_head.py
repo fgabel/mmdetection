@@ -191,7 +191,7 @@ class YOLOXHead(BaseDenseHead, BBoxTestMixin):
         cls_score = conv_cls(cls_feat)
         bbox_pred = conv_reg(reg_feat)
         objectness = conv_obj(reg_feat)
-
+        
         return cls_score, bbox_pred, objectness
 
     def forward(self, feats):

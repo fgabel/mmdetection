@@ -1,10 +1,10 @@
-ARG PYTORCH="1.6.0"
-ARG CUDA="10.1"
-ARG CUDNN="7"
+ARG PYTORCH="1.10.0"
+ARG CUDA="11.3"
+ARG CUDNN="8"
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 
-ARG MMCV="1.3.17"
-ARG MMDET="2.22.0"
+ARG MMCV="1.4.3"
+ARG MMDET="2.20.0"
 
 ENV PYTHONUNBUFFERED TRUE
 
@@ -39,7 +39,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh \
 
 COPY config.properties /home/model-server/config.properties
 RUN mkdir /home/model-server/model-store && chown -R model-server /home/model-server/model-store
-
+COPY latest_deploy.mar /home/model-server/model-store
 EXPOSE 8080 8081 8082
 
 USER model-server

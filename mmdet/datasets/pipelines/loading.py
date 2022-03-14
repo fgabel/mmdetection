@@ -66,7 +66,6 @@ class LoadImageFromFile:
         img = mmcv.imfrombytes(img_bytes, flag=self.color_type)
         if self.to_float32:
             img = img.astype(np.float32)
-
         results['filename'] = filename
         results['ori_filename'] = results['img_info']['filename']
         results['img'] = img
